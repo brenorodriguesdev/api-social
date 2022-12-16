@@ -2,12 +2,12 @@ import { getRepository } from 'typeorm'
 import { InviteFriendShip } from '../entities/invite-friendship'
 import { User } from '../entities/user'
 
-interface SendInviteFriendListProps {
+interface SendInviteFriendShipProps {
   idUserSend: number
   idUserRecv: number
 }
 
-export const sendInviteFriendListService = async ({ idUserSend, idUserRecv }: SendInviteFriendListProps): Promise<void | Error> => {
+export const sendInviteFriendShipService = async ({ idUserSend, idUserRecv }: SendInviteFriendShipProps): Promise<void | Error> => {
   const userRepository = getRepository(User)
   const userSend = await userRepository.findOne({ where: { id: idUserSend } })
   if (!userSend) {
