@@ -10,7 +10,7 @@ interface SignUpServiceProps {
 
 export const signUpService = async ({ email, name, password }: SignUpServiceProps): Promise<void | Error> => {
   const userRepository = getRepository(User)
-  const isEmailAlreadyExist = await userRepository.find({ where: { email } })
+  const isEmailAlreadyExist = await userRepository.findOne({ where: { email } })
   if (isEmailAlreadyExist) {
     return new Error('Esse e-mail já está em uso!')
   }
