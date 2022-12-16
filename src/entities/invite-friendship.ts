@@ -16,6 +16,9 @@ export class InviteFriendShip {
     userReceived: User
 
   @Column()
+    create_at: Date
+
+  @Column()
     accepted_at: Date
 
   @Column()
