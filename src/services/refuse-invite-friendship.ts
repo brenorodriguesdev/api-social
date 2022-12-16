@@ -2,12 +2,12 @@ import { getRepository } from 'typeorm'
 import { InviteFriendShip } from '../entities/invite-friendship'
 import { User } from '../entities/user'
 
-interface AcceptInviteFriendShipProps {
+interface RefuseInviteFriendShipProps {
   idUser: number
   idInviteFriendShip: number
 }
 
-export const acceptInviteFriendShipService = async ({ idUser, idInviteFriendShip }: AcceptInviteFriendShipProps): Promise<void | Error> => {
+export const refuseInviteFriendShipService = async ({ idUser, idInviteFriendShip }: RefuseInviteFriendShipProps): Promise<void | Error> => {
   const userRepository = getRepository(User)
   const user = await userRepository.findOne({ where: { id: idUser } })
   if (!user) {
@@ -32,6 +32,6 @@ export const acceptInviteFriendShipService = async ({ idUser, idInviteFriendShip
     return new Error('Esse convite já foi recusado!')
   }
 
-  inviteFriendShip.accepted_at = new Date()
+  inviteFriendShip.refused_at = new Date()
   await inviteFriendShipRepository.save(inviteFriendShip)
 }
