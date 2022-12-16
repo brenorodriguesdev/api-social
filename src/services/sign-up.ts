@@ -20,6 +20,9 @@ export const signUpService = async ({ email, name, password }: SignUpServiceProp
   user.name = name
   const passwordHashed = await crypt(password)
   user.password = passwordHashed
+  user.create_at = new Date()
+  user.is_connected = false
+  user.is_active = false
 
   await userRepository.save(user)
 }
