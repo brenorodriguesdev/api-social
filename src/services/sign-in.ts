@@ -3,12 +3,12 @@ import { User } from '../entities/user'
 import { compare } from '../utils/hash'
 import { generate } from '../utils/jwt'
 
-export interface SignInServiceProps {
+interface SignInServiceProps {
   email: string
   password: string
 }
 
-export const signInService = async ({ email, password }): Promise<string | Error> => {
+export const signInService = async ({ email, password }: SignInServiceProps): Promise<string | Error> => {
   const userRepository = getRepository(User)
   const user = await userRepository.findOne({ where: { email } })
   if (!user) {
