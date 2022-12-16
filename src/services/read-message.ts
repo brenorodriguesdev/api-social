@@ -24,5 +24,5 @@ export const readMessageService = async ({ idChatMessage, idUserRead }: ReadMess
   }
 
   chatMessage.read_at = new Date()
-  chatMessageRepository.save(chatMessage)
+  await chatMessageRepository.save(chatMessage)
 }

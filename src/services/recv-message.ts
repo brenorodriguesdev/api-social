@@ -24,5 +24,5 @@ export const recvMessageService = async ({ idChatMessage, idUserRecv }: RecvMess
   }
 
   chatMessage.recv_at = new Date()
-  chatMessageRepository.save(chatMessage)
+  await chatMessageRepository.save(chatMessage)
 }
