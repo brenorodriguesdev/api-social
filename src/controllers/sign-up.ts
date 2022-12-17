@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { signUpService } from '../services/sign-up'
 import { badRequest, created, serverError } from '../utils/http-helper'
-import { validateRequiredFields } from '../validators/validate-required-fields'
+import { validateEmail, validateRequiredFields } from '../validators'
 
 export const signUpController = async (request: Request, response: Response): Promise<any> => {
   try {
@@ -15,6 +15,12 @@ export const signUpController = async (request: Request, response: Response): Pr
 
     if (error) {
       return badRequest(response, error.message)
+    }
+
+    const emailError = validateEmail('email', request.body)
+
+    if (emailError) {
+      return badRequest(response, emailError.message)
     }
 
     const result = await signUpService(request.body)
